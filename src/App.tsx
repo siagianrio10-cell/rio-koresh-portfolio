@@ -20,6 +20,7 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
+
       if (hash.startsWith("project-")) {
         setActiveCaseStudyId(hash);
       } else if (hash) {
@@ -29,8 +30,12 @@ export default function App() {
     };
 
     handleHashChange();
+
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
   }, []);
 
   const handleOpenCaseStudy = (projectId: string) => {
@@ -41,10 +46,14 @@ export default function App() {
   const handleCloseCaseStudy = () => {
     setActiveCaseStudyId(null);
     window.location.hash = "projects";
+
     // Smooth scroll back to projects section
     setTimeout(() => {
       const el = document.getElementById("projects");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }, 50);
   };
 
@@ -54,13 +63,20 @@ export default function App() {
     window.location.hash = sectionId;
 
     if (sectionId === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
       return;
     }
 
     const el = document.getElementById(sectionId);
+
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
@@ -95,23 +111,23 @@ export default function App() {
             />
           </div>
 
-          {/* 2. Short Positioning Statement */}
-          <PositioningStatement />
-
-          {/* 3. Experience Overview Timeline */}
-          <ExperienceSection onSelectProject={handleOpenCaseStudy} />
-
-          {/* 4. Featured Projects with 6 Interactive Case Studies */}
-          <FeaturedProjects onOpenCaseStudy={handleOpenCaseStudy} />
-
-          {/* 5. HR Capabilities / Practice Areas */}
-          <CapabilitiesSection />
-
-          {/* 6. Grounded About Section */}
+          {/* 2. About Me */}
           <AboutSection
             onOpenCV={() => setIsCVModalOpen(true)}
             onExploreProjects={() => handleNavigate("projects")}
           />
+
+          {/* 3. How I Work / Positioning */}
+          <PositioningStatement />
+
+          {/* 4. Experience Overview Timeline */}
+          <ExperienceSection onSelectProject={handleOpenCaseStudy} />
+
+          {/* 5. Featured Projects with 6 Interactive Case Studies */}
+          <FeaturedProjects onOpenCaseStudy={handleOpenCaseStudy} />
+
+          {/* 6. HR Capabilities / Practice Areas */}
+          <CapabilitiesSection />
 
           {/* 7. Professional Contact CTA */}
           <ContactSection onOpenCV={() => setIsCVModalOpen(true)} />
