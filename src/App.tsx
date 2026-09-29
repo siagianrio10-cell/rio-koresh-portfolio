@@ -102,19 +102,19 @@ export default function App() {
         </main>
       ) : (
         <main>
-          {/* 1. Hero Section */}
+          {/* 1. About Me (now at the top) */}
           <div id="home">
-            <Hero
+            <AboutSection
+              onOpenCV={() => setIsCVModalOpen(true)}
               onExploreProjects={() => handleNavigate("projects")}
-              onViewExperience={() => handleNavigate("experience")}
-              onOpenCaseStudy={handleOpenCaseStudy}
             />
           </div>
 
-          {/* 2. About Me */}
-          <AboutSection
-            onOpenCV={() => setIsCVModalOpen(true)}
+          {/* 2. Hero Section */}
+          <Hero
             onExploreProjects={() => handleNavigate("projects")}
+            onViewExperience={() => handleNavigate("experience")}
+            onOpenCaseStudy={handleOpenCaseStudy}
           />
 
           {/* 3. How I Work / Positioning */}
