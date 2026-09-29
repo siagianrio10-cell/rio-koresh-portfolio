@@ -518,7 +518,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                             preserveAspectRatio="xMidYMid meet"
                             aria-label="Development planning from competency gaps to individual development plan"
                           >
-                            {/* Input labels */}
                             <text
                               x="35"
                               y="38"
@@ -558,7 +557,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               Competency Gaps
                             </text>
 
-                            {/* Connecting lines */}
                             <path
                               d="M 165 68 C 205 68, 210 105, 245 105"
                               fill="none"
@@ -583,7 +581,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               className="text-zinc-300"
                             />
 
-                            {/* Center diagnosis */}
                             <circle
                               cx="285"
                               cy="105"
@@ -611,7 +608,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               GAP
                             </text>
 
-                            {/* Action line */}
                             <path
                               d="M 328 105 C 355 105, 360 105, 390 105"
                               fill="none"
@@ -625,7 +621,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               className="fill-indigo-300"
                             />
 
-                            {/* Action */}
                             <text
                               x="390"
                               y="65"
@@ -685,7 +680,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               Development Action
                             </text>
 
-                            {/* Bottom output */}
                             <path
                               d="M 285 149 L 285 178"
                               fill="none"
@@ -765,7 +759,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                               preserveAspectRatio="xMidYMid meet"
                               aria-label="End-to-end recruitment and selection process"
                             >
-                              {/* Main flowing line */}
                               <path
                                 d="M 42 110 C 105 110, 105 75, 160 75 S 220 145, 275 110 S 335 75, 380 110 S 440 145, 478 110"
                                 fill="none"
@@ -774,7 +767,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                                 className="text-zinc-300"
                               />
 
-                              {/* Nodes */}
                               {[
                                 {
                                   x: 42,
@@ -837,7 +829,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                                 </React.Fragment>
                               ))}
 
-                              {/* Interview as parallel evaluation point */}
                               <circle
                                 cx="320"
                                 cy="158"
@@ -871,7 +862,6 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                                 className="text-zinc-300"
                               />
 
-                              {/* Onboarding endpoint */}
                               <path
                                 d="M 478 128 L 478 175"
                                 fill="none"
@@ -922,7 +912,304 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     </div>
 
                   /* ===================================================== */
-                  /* PROJECT 05–06 — EXISTING ARTIFACT                   */
+                  /* PROJECT 05 — HR GENERALIST & HRGA                  */
+                  /* ===================================================== */
+                  ) : project.id === "project-05" ? (
+                    <div className="pt-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-700">
+                          {getProjectIcon(project.id)}
+                          <span>HR Generalist Scope</span>
+                        </div>
+
+                        <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-400">
+                          HR ecosystem
+                        </span>
+                      </div>
+
+                      <div className="relative rounded-xl border border-zinc-200/80 bg-[#F8FAFC] overflow-hidden">
+                        <div
+                          className="absolute inset-0 opacity-35"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(to right, rgba(161,161,170,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(161,161,170,0.12) 1px, transparent 1px)",
+                            backgroundSize: "32px 32px",
+                          }}
+                        />
+
+                        <div className="relative px-3 sm:px-4 py-4">
+                          <div className="relative mx-auto max-w-[440px] h-[255px]">
+                            <svg
+                              viewBox="0 0 440 255"
+                              className="w-full h-full overflow-visible"
+                              preserveAspectRatio="xMidYMid meet"
+                              aria-label="HR Generalist and HRGA scope"
+                            >
+                              {/* Outer ecosystem */}
+                              <ellipse
+                                cx="220"
+                                cy="127"
+                                rx="145"
+                                ry="91"
+                                fill="none"
+                                stroke="#D4D4D8"
+                                strokeWidth="1.5"
+                                strokeDasharray="4 5"
+                              />
+
+                              {/* Inner ecosystem */}
+                              <ellipse
+                                cx="220"
+                                cy="127"
+                                rx="88"
+                                ry="56"
+                                fill="none"
+                                stroke="#E4E4E7"
+                                strokeWidth="1"
+                              />
+
+                              {/* Connections */}
+                              <line
+                                x1="220"
+                                y1="71"
+                                x2="220"
+                                y2="48"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              <line
+                                x1="164"
+                                y1="91"
+                                x2="130"
+                                y2="72"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              <line
+                                x1="276"
+                                y1="91"
+                                x2="310"
+                                y2="72"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              <line
+                                x1="164"
+                                y1="163"
+                                x2="130"
+                                y2="182"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              <line
+                                x1="276"
+                                y1="163"
+                                x2="310"
+                                y2="182"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              <line
+                                x1="220"
+                                y1="183"
+                                x2="220"
+                                y2="207"
+                                stroke="#D4D4D8"
+                                strokeWidth="1"
+                              />
+
+                              {/* Center */}
+                              <circle
+                                cx="220"
+                                cy="127"
+                                r="45"
+                                className="fill-zinc-900 group-hover:fill-blue-950 transition-colors duration-300"
+                              />
+
+                              <text
+                                x="220"
+                                y="122"
+                                textAnchor="middle"
+                                className="fill-white font-bold"
+                                style={{
+                                  fontSize: "12px",
+                                  letterSpacing: "0.8px",
+                                }}
+                              >
+                                HR
+                              </text>
+
+                              <text
+                                x="220"
+                                y="139"
+                                textAnchor="middle"
+                                className="fill-zinc-300 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "1px",
+                                }}
+                              >
+                                GENERALIST
+                              </text>
+
+                              {/* Recruitment */}
+                              <circle
+                                cx="220"
+                                cy="40"
+                                r="7"
+                                className="fill-blue-500 group-hover:fill-blue-600 transition-colors"
+                              />
+
+                              <text
+                                x="220"
+                                y="25"
+                                textAnchor="middle"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
+                                RECRUITMENT
+                              </text>
+
+                              {/* HRIS */}
+                              <circle
+                                cx="121"
+                                cy="66"
+                                r="7"
+                                className="fill-sky-500 group-hover:fill-sky-600 transition-colors"
+                              />
+
+                              <text
+                                x="108"
+                                y="58"
+                                textAnchor="end"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
+                                HRIS
+                              </text>
+
+                              {/* Payroll */}
+                              <circle
+                                cx="319"
+                                cy="66"
+                                r="7"
+                                className="fill-sky-500 group-hover:fill-sky-600 transition-colors"
+                              />
+
+                              <text
+                                x="332"
+                                y="58"
+                                textAnchor="start"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
+                                PAYROLL
+                              </text>
+
+                              {/* Employee Administration */}
+                              <circle
+                                cx="121"
+                                cy="188"
+                                r="7"
+                                className="fill-sky-400 group-hover:fill-sky-500 transition-colors"
+                              />
+
+                              <text
+                                x="108"
+                                y="202"
+                                textAnchor="end"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "7.5px",
+                                  letterSpacing: "0.4px",
+                                }}
+                              >
+                                EMPLOYEE ADMIN
+                              </text>
+
+                              {/* Compliance */}
+                              <circle
+                                cx="319"
+                                cy="188"
+                                r="7"
+                                className="fill-sky-400 group-hover:fill-sky-500 transition-colors"
+                              />
+
+                              <text
+                                x="332"
+                                y="202"
+                                textAnchor="start"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.5px",
+                                }}
+                              >
+                                COMPLIANCE
+                              </text>
+
+                              {/* General Affairs */}
+                              <circle
+                                cx="220"
+                                cy="215"
+                                r="7"
+                                className="fill-blue-600 group-hover:fill-blue-700 transition-colors"
+                              />
+
+                              <text
+                                x="220"
+                                y="239"
+                                textAnchor="middle"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
+                                GENERAL AFFAIRS
+                              </text>
+                            </svg>
+                          </div>
+
+                          <div className="border-t border-zinc-200/80 pt-3 mt-1">
+                            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                              <span className="text-[9px] font-mono uppercase tracking-wide text-zinc-400">
+                                People
+                              </span>
+
+                              <span className="text-zinc-300">·</span>
+
+                              <span className="text-[9px] font-mono uppercase tracking-wide text-zinc-400">
+                                Process
+                              </span>
+
+                              <span className="text-zinc-300">·</span>
+
+                              <span className="text-[9px] font-mono uppercase tracking-wide text-zinc-400">
+                                Operations
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  /* ===================================================== */
+                  /* PROJECT 06 — EXISTING ARTIFACT                      */
                   /* ===================================================== */
                   ) : (
                     <div className="p-3.5 bg-zinc-50 group-hover:bg-zinc-100/70 rounded-xl border border-zinc-200/70 transition-colors space-y-1.5">
