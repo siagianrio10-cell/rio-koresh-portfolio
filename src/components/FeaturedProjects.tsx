@@ -1305,7 +1305,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                         </div>
                       </div>
                     </div>
-                  )}
+                  ) : null)}
                 </div>
 
                 {/* Card Footer */}
@@ -1321,4 +1321,4 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
       </div>
     </section>
   );
-) : null)}
+};
