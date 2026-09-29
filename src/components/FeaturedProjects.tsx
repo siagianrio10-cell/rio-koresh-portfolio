@@ -63,7 +63,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
       className="py-20 sm:py-24 border-b border-zinc-200/80 bg-[#FAFAFA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Header & Filter Controls */}
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl space-y-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
@@ -82,7 +82,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
             </p>
           </div>
 
-          {/* Interactive Filter Control Tabs */}
+          {/* Filters */}
           <div className="flex items-center gap-1 p-1 bg-zinc-200/60 rounded-lg self-start md:self-end overflow-x-auto">
             {filterOptions.map((opt) => (
               <button
@@ -100,7 +100,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
           </div>
         </div>
 
-        {/* 6 Projects Grid */}
+        {/* Projects */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project) => {
             const isFlagship = project.id === "project-01";
@@ -116,7 +116,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                 }`}
               >
                 <div className="space-y-4">
-                  {/* Card Lead */}
+                  {/* Project Number */}
                   <div className="flex items-center justify-between text-xs text-zinc-500 font-mono">
                     <span className="font-semibold text-zinc-400">
                       PROJECT {project.number}
@@ -148,100 +148,203 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     {project.shortDescription}
                   </p>
 
-                  {/* PROJECT 01 — VISUAL FUNNEL */}
+                  {/* =====================================================
+                      PROJECT 01 — REAL FUNNEL VISUAL
+                     ===================================================== */}
                   {project.id === "project-01" ? (
-                    <div className="p-4 bg-zinc-50 group-hover:bg-zinc-100/70 rounded-xl border border-zinc-200/70 transition-colors">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-1.5 font-medium text-zinc-700 text-xs">
-                          <BarChart3 className="w-4 h-4 text-blue-600" />
-                          <span>Promotion Readiness Flow</span>
+                    <div className="pt-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-700">
+                          {getProjectIcon(project.id)}
+                          <span>Promotion Readiness</span>
                         </div>
 
-                        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wide">
-                          Illustrative
+                        <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-400">
+                          Illustrative view
                         </span>
                       </div>
 
-                      <div className="space-y-2">
-                        {/* 790 */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-20 sm:w-24 shrink-0 text-right">
-                            <span className="text-base font-bold font-mono text-zinc-900">
-                              790
-                            </span>
+                      <div className="relative rounded-xl border border-zinc-200/80 bg-[#F8FAFC] overflow-hidden">
+                        {/* subtle grid */}
+                        <div
+                          className="absolute inset-0 opacity-40"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(to right, rgba(161,161,170,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(161,161,170,0.12) 1px, transparent 1px)",
+                            backgroundSize: "32px 32px",
+                          }}
+                        />
+
+                        <div className="relative p-4 sm:p-5">
+                          {/* Funnel chart */}
+                          <div className="relative h-[190px] sm:h-[205px]">
+                            <svg
+                              viewBox="0 0 520 230"
+                              className="w-full h-full overflow-visible"
+                              preserveAspectRatio="xMidYMid meet"
+                              aria-label="Talent pool promotion readiness funnel"
+                            >
+                              {/* Funnel stage 1 */}
+                              <polygon
+                                points="35,15 485,15 420,62 100,62"
+                                className="fill-blue-500 group-hover:fill-blue-600 transition-colors duration-300"
+                              />
+
+                              {/* Funnel stage 2 */}
+                              <polygon
+                                points="100,62 420,62 375,110 145,110"
+                                className="fill-blue-400 group-hover:fill-blue-500 transition-colors duration-300"
+                              />
+
+                              {/* Funnel stage 3 */}
+                              <polygon
+                                points="145,110 375,110 335,158 185,158"
+                                className="fill-blue-300 group-hover:fill-blue-400 transition-colors duration-300"
+                              />
+
+                              {/* Funnel stage 4 */}
+                              <polygon
+                                points="185,158 335,158 315,205 205,205"
+                                className="fill-blue-700 group-hover:fill-blue-800 transition-colors duration-300"
+                              />
+
+                              {/* Labels */}
+                              <text
+                                x="260"
+                                y="43"
+                                textAnchor="middle"
+                                className="fill-white font-bold"
+                                style={{ fontSize: "20px" }}
+                              >
+                                790
+                              </text>
+
+                              <text
+                                x="260"
+                                y="91"
+                                textAnchor="middle"
+                                className="fill-white font-bold"
+                                style={{ fontSize: "19px" }}
+                              >
+                                322
+                              </text>
+
+                              <text
+                                x="260"
+                                y="139"
+                                textAnchor="middle"
+                                className="fill-white font-bold"
+                                style={{ fontSize: "18px" }}
+                              >
+                                217
+                              </text>
+
+                              <text
+                                x="260"
+                                y="187"
+                                textAnchor="middle"
+                                className="fill-white font-bold"
+                                style={{ fontSize: "17px" }}
+                              >
+                                68
+                              </text>
+
+                              {/* Stage labels */}
+                              <text
+                                x="260"
+                                y="57"
+                                textAnchor="middle"
+                                className="fill-white/80"
+                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                              >
+                                TALENT POOL
+                              </text>
+
+                              <text
+                                x="260"
+                                y="105"
+                                textAnchor="middle"
+                                className="fill-white/80"
+                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                              >
+                                ASSESSED
+                              </text>
+
+                              <text
+                                x="260"
+                                y="153"
+                                textAnchor="middle"
+                                className="fill-white/80"
+                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                              >
+                                RECOMMENDED
+                              </text>
+
+                              <text
+                                x="260"
+                                y="200"
+                                textAnchor="middle"
+                                className="fill-white/90"
+                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                              >
+                                PROMOTION READY
+                              </text>
+                            </svg>
+
+                            {/* Left-side stage labels */}
+                            <div className="absolute left-0 top-[7%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
+                              Pool
+                            </div>
+
+                            <div className="absolute left-0 top-[29%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
+                              Assessment
+                            </div>
+
+                            <div className="absolute left-0 top-[51%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
+                              Review
+                            </div>
+
+                            <div className="absolute left-0 bottom-[3%] text-[8px] sm:text-[9px] font-semibold text-blue-600 uppercase tracking-wide">
+                              Ready
+                            </div>
                           </div>
 
-                          <div className="h-8 flex-1 rounded-md bg-white border border-zinc-200 flex items-center px-3">
-                            <span className="text-[11px] text-zinc-500">
-                              Candidates
-                            </span>
-                          </div>
-                        </div>
+                          {/* Conversion indicators */}
+                          <div className="grid grid-cols-3 gap-2 border-t border-zinc-200/80 pt-3 mt-1">
+                            <div className="text-center">
+                              <div className="text-[9px] font-mono text-zinc-400">
+                                ASSESSED
+                              </div>
+                              <div className="text-[11px] font-semibold text-zinc-700">
+                                40.8%
+                              </div>
+                            </div>
 
-                        <div className="flex justify-center text-zinc-300 text-xs">
-                          ↓
-                        </div>
+                            <div className="text-center border-l border-zinc-200/70">
+                              <div className="text-[9px] font-mono text-zinc-400">
+                                RECOMMENDED
+                              </div>
+                              <div className="text-[11px] font-semibold text-zinc-700">
+                                67.4%
+                              </div>
+                            </div>
 
-                        {/* 322 */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-20 sm:w-24 shrink-0 text-right">
-                            <span className="text-base font-bold font-mono text-zinc-900">
-                              322
-                            </span>
-                          </div>
-
-                          <div className="h-8 flex-1 rounded-md bg-white border border-zinc-200 flex items-center px-3">
-                            <span className="text-[11px] text-zinc-500">
-                              Assessed
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex justify-center text-zinc-300 text-xs">
-                          ↓
-                        </div>
-
-                        {/* 217 */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-20 sm:w-24 shrink-0 text-right">
-                            <span className="text-base font-bold font-mono text-zinc-900">
-                              217
-                            </span>
-                          </div>
-
-                          <div className="h-8 flex-1 rounded-md bg-white border border-zinc-200 flex items-center px-3">
-                            <span className="text-[11px] text-zinc-500">
-                              Recommended
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex justify-center text-zinc-300 text-xs">
-                          ↓
-                        </div>
-
-                        {/* 68 */}
-                        <div className="flex items-center gap-3">
-                          <div className="w-20 sm:w-24 shrink-0 text-right">
-                            <span className="text-base font-bold font-mono text-blue-700">
-                              68
-                            </span>
-                          </div>
-
-                          <div className="h-8 flex-1 rounded-md bg-blue-50 border border-blue-100 flex items-center justify-between px-3">
-                            <span className="text-[11px] text-blue-800 font-medium">
-                              Promotion Ready
-                            </span>
-
-                            <span className="text-[10px] font-mono text-blue-600">
-                              Final
-                            </span>
+                            <div className="text-center border-l border-zinc-200/70">
+                              <div className="text-[9px] font-mono text-zinc-400">
+                                READY
+                              </div>
+                              <div className="text-[11px] font-semibold text-blue-700">
+                                31.3%
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    /* OTHER PROJECTS — EXISTING PREVIEW */
+                    /* =====================================================
+                       OTHER PROJECTS — EXISTING PREVIEW
+                       ===================================================== */
                     <div className="p-3.5 bg-zinc-50 group-hover:bg-zinc-100/70 rounded-xl border border-zinc-200/70 transition-colors space-y-1.5">
                       <div className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-1.5 font-medium text-zinc-700">
@@ -267,7 +370,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                   )}
                 </div>
 
-                {/* Card Footer CTA */}
+                {/* CTA */}
                 <div className="pt-6 mt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors">
                   <span>Explore Case Study</span>
 
