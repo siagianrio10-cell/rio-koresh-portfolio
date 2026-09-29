@@ -63,7 +63,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
       className="py-20 sm:py-24 border-b border-zinc-200/80 bg-[#FAFAFA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Header */}
+        {/* Header & Filter Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl space-y-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
@@ -82,7 +82,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
             </p>
           </div>
 
-          {/* Filters */}
+          {/* Interactive Filter Control Tabs */}
           <div className="flex items-center gap-1 p-1 bg-zinc-200/60 rounded-lg self-start md:self-end overflow-x-auto">
             {filterOptions.map((opt) => (
               <button
@@ -100,7 +100,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
           </div>
         </div>
 
-        {/* Projects */}
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project) => {
             const isFlagship = project.id === "project-01";
@@ -116,7 +116,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                 }`}
               >
                 <div className="space-y-4">
-                  {/* Project Number */}
+                  {/* Card Lead */}
                   <div className="flex items-center justify-between text-xs text-zinc-500 font-mono">
                     <span className="font-semibold text-zinc-400">
                       PROJECT {project.number}
@@ -149,10 +149,11 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                   </p>
 
                   {/* =====================================================
-                      PROJECT 01 — REAL FUNNEL VISUAL
+                      PROJECT 01 — PROMOTION READINESS FUNNEL
                      ===================================================== */}
                   {project.id === "project-01" ? (
                     <div className="pt-2">
+                      {/* Chart Header */}
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-700">
                           {getProjectIcon(project.id)}
@@ -164,8 +165,9 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                         </span>
                       </div>
 
+                      {/* Funnel Chart */}
                       <div className="relative rounded-xl border border-zinc-200/80 bg-[#F8FAFC] overflow-hidden">
-                        {/* subtle grid */}
+                        {/* Subtle grid */}
                         <div
                           className="absolute inset-0 opacity-40"
                           style={{
@@ -175,165 +177,163 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                           }}
                         />
 
-                        <div className="relative p-4 sm:p-5">
-                          {/* Funnel chart */}
-                          <div className="relative h-[190px] sm:h-[205px]">
+                        <div className="relative px-3 sm:px-4 pt-3 sm:pt-4 pb-4">
+                          {/* Larger funnel area */}
+                          <div className="relative h-[215px] sm:h-[225px]">
                             <svg
-                              viewBox="0 0 520 230"
+                              viewBox="0 0 520 250"
                               className="w-full h-full overflow-visible"
                               preserveAspectRatio="xMidYMid meet"
                               aria-label="Talent pool promotion readiness funnel"
                             >
-                              {/* Funnel stage 1 */}
+                              {/* Stage 1 — Talent Pool */}
                               <polygon
-                                points="35,15 485,15 420,62 100,62"
+                                points="20,15 500,15 425,70 95,70"
                                 className="fill-blue-500 group-hover:fill-blue-600 transition-colors duration-300"
                               />
 
-                              {/* Funnel stage 2 */}
+                              {/* Stage 2 — Assessed */}
                               <polygon
-                                points="100,62 420,62 375,110 145,110"
+                                points="95,70 425,70 375,125 145,125"
                                 className="fill-blue-400 group-hover:fill-blue-500 transition-colors duration-300"
                               />
 
-                              {/* Funnel stage 3 */}
+                              {/* Stage 3 — Recommended */}
                               <polygon
-                                points="145,110 375,110 335,158 185,158"
+                                points="145,125 375,125 335,180 185,180"
                                 className="fill-blue-300 group-hover:fill-blue-400 transition-colors duration-300"
                               />
 
-                              {/* Funnel stage 4 */}
+                              {/* Stage 4 — Promotion Ready */}
                               <polygon
-                                points="185,158 335,158 315,205 205,205"
+                                points="185,180 335,180 310,235 210,235"
                                 className="fill-blue-700 group-hover:fill-blue-800 transition-colors duration-300"
                               />
 
-                              {/* Labels */}
+                              {/* Main Numbers */}
                               <text
                                 x="260"
-                                y="43"
+                                y="46"
                                 textAnchor="middle"
                                 className="fill-white font-bold"
-                                style={{ fontSize: "20px" }}
+                                style={{ fontSize: "22px" }}
                               >
                                 790
                               </text>
 
                               <text
                                 x="260"
-                                y="91"
+                                y="101"
                                 textAnchor="middle"
                                 className="fill-white font-bold"
-                                style={{ fontSize: "19px" }}
+                                style={{ fontSize: "21px" }}
                               >
                                 322
                               </text>
 
                               <text
                                 x="260"
-                                y="139"
+                                y="156"
                                 textAnchor="middle"
                                 className="fill-white font-bold"
-                                style={{ fontSize: "18px" }}
+                                style={{ fontSize: "20px" }}
                               >
                                 217
                               </text>
 
                               <text
                                 x="260"
-                                y="187"
+                                y="211"
                                 textAnchor="middle"
                                 className="fill-white font-bold"
-                                style={{ fontSize: "17px" }}
+                                style={{ fontSize: "19px" }}
                               >
                                 68
                               </text>
 
-                              {/* Stage labels */}
+                              {/* Stage Labels */}
                               <text
                                 x="260"
-                                y="57"
+                                y="62"
                                 textAnchor="middle"
-                                className="fill-white/80"
-                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                                className="fill-white/85"
+                                style={{
+                                  fontSize: "7px",
+                                  letterSpacing: "1px",
+                                }}
                               >
                                 TALENT POOL
                               </text>
 
                               <text
                                 x="260"
-                                y="105"
+                                y="117"
                                 textAnchor="middle"
-                                className="fill-white/80"
-                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                                className="fill-white/85"
+                                style={{
+                                  fontSize: "7px",
+                                  letterSpacing: "1px",
+                                }}
                               >
                                 ASSESSED
                               </text>
 
                               <text
                                 x="260"
-                                y="153"
+                                y="172"
                                 textAnchor="middle"
-                                className="fill-white/80"
-                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                                className="fill-white/85"
+                                style={{
+                                  fontSize: "7px",
+                                  letterSpacing: "1px",
+                                }}
                               >
                                 RECOMMENDED
                               </text>
 
                               <text
                                 x="260"
-                                y="200"
+                                y="227"
                                 textAnchor="middle"
                                 className="fill-white/90"
-                                style={{ fontSize: "7px", letterSpacing: "1px" }}
+                                style={{
+                                  fontSize: "7px",
+                                  letterSpacing: "0.8px",
+                                }}
                               >
                                 PROMOTION READY
                               </text>
                             </svg>
-
-                            {/* Left-side stage labels */}
-                            <div className="absolute left-0 top-[7%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
-                              Pool
-                            </div>
-
-                            <div className="absolute left-0 top-[29%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
-                              Assessment
-                            </div>
-
-                            <div className="absolute left-0 top-[51%] text-[8px] sm:text-[9px] font-medium text-zinc-400 uppercase tracking-wide">
-                              Review
-                            </div>
-
-                            <div className="absolute left-0 bottom-[3%] text-[8px] sm:text-[9px] font-semibold text-blue-600 uppercase tracking-wide">
-                              Ready
-                            </div>
                           </div>
 
-                          {/* Conversion indicators */}
+                          {/* Conversion Metrics */}
                           <div className="grid grid-cols-3 gap-2 border-t border-zinc-200/80 pt-3 mt-1">
                             <div className="text-center">
-                              <div className="text-[9px] font-mono text-zinc-400">
-                                ASSESSED
+                              <div className="text-[9px] font-mono text-zinc-400 uppercase">
+                                Assessed
                               </div>
-                              <div className="text-[11px] font-semibold text-zinc-700">
+
+                              <div className="text-[11px] font-semibold text-zinc-700 mt-0.5">
                                 40.8%
                               </div>
                             </div>
 
                             <div className="text-center border-l border-zinc-200/70">
-                              <div className="text-[9px] font-mono text-zinc-400">
-                                RECOMMENDED
+                              <div className="text-[9px] font-mono text-zinc-400 uppercase">
+                                Recommended
                               </div>
-                              <div className="text-[11px] font-semibold text-zinc-700">
+
+                              <div className="text-[11px] font-semibold text-zinc-700 mt-0.5">
                                 67.4%
                               </div>
                             </div>
 
                             <div className="text-center border-l border-zinc-200/70">
-                              <div className="text-[9px] font-mono text-zinc-400">
-                                READY
+                              <div className="text-[9px] font-mono text-zinc-400 uppercase">
+                                Ready
                               </div>
-                              <div className="text-[11px] font-semibold text-blue-700">
+
+                              <div className="text-[11px] font-semibold text-blue-700 mt-0.5">
                                 31.3%
                               </div>
                             </div>
@@ -370,7 +370,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                   )}
                 </div>
 
-                {/* CTA */}
+                {/* Card Footer CTA */}
                 <div className="pt-6 mt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors">
                   <span>Explore Case Study</span>
 
