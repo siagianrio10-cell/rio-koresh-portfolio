@@ -1209,9 +1209,9 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     </div>
 
                   /* ===================================================== */
-                  /* PROJECT 06 — WORKFORCE PLANNING & EMPLOYEE COST         */
+                  /* PROJECT 06 — WORKFORCE PLANNING & EMPLOYEE COST     */
                   /* ===================================================== */
-                  ) : project.id === "project-06" ? (
+                  ) : (
                     <div className="pt-2">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-700">
@@ -1234,65 +1234,221 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                           }}
                         />
 
-                        <div className="relative px-3 sm:px-4 py-4">
+                        <div className="relative px-4 sm:px-5 py-4">
                           <div className="relative h-[225px] sm:h-[235px]">
                             <svg
                               viewBox="0 0 520 250"
-                              className="w-full h-full"
+                              className="w-full h-full overflow-visible"
                               preserveAspectRatio="xMidYMid meet"
                               aria-label="Workforce planning scenarios from understaffed to overstaffed"
                             >
-                              <text x="28" y="28" className="fill-zinc-400" style={{ fontSize: "9px", letterSpacing: "1.2px" }}>
+                              <text
+                                x="260"
+                                y="28"
+                                textAnchor="middle"
+                                className="fill-zinc-500 font-semibold"
+                                style={{
+                                  fontSize: "9px",
+                                  letterSpacing: "1px",
+                                }}
+                              >
                                 WORKFORCE BALANCE
                               </text>
 
-                              <text x="492" y="28" textAnchor="end" className="fill-zinc-400" style={{ fontSize: "9px", letterSpacing: "1px" }}>
-                                HEADCOUNT · COST
+                              <text
+                                x="260"
+                                y="48"
+                                textAnchor="middle"
+                                className="fill-zinc-400"
+                                style={{ fontSize: "8px" }}
+                              >
+                                Store requirement · Manpower · Employee cost
                               </text>
 
-                              <line x1="55" y1="105" x2="465" y2="105" stroke="currentColor" strokeWidth="2" className="text-zinc-200" />
-                              <line x1="55" y1="105" x2="185" y2="105" stroke="currentColor" strokeWidth="5" strokeLinecap="round" className="text-zinc-300" />
-                              <line x1="185" y1="105" x2="335" y2="105" stroke="currentColor" strokeWidth="6" strokeLinecap="round" className="text-teal-500" />
-                              <line x1="335" y1="105" x2="465" y2="105" stroke="currentColor" strokeWidth="5" strokeLinecap="round" className="text-zinc-300" />
+                              <line
+                                x1="58"
+                                y1="112"
+                                x2="462"
+                                y2="112"
+                                stroke="currentColor"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                className="text-zinc-200"
+                              />
 
-                              <circle cx="55" cy="105" r="8" className="fill-zinc-500" />
-                              <circle cx="260" cy="105" r="12" className="fill-teal-600 group-hover:fill-teal-700 transition-colors duration-300" />
-                              <circle cx="465" cy="105" r="8" className="fill-zinc-500" />
-                              <circle cx="260" cy="105" r="21" fill="none" stroke="currentColor" strokeWidth="1" className="text-teal-200" />
+                              <line
+                                x1="58"
+                                y1="112"
+                                x2="258"
+                                y2="112"
+                                stroke="currentColor"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                className="text-zinc-300"
+                              />
 
-                              <text x="55" y="77" textAnchor="start" className="fill-zinc-700 font-semibold" style={{ fontSize: "10px", letterSpacing: "0.7px" }}>
+                              <line
+                                x1="258"
+                                y1="112"
+                                x2="262"
+                                y2="112"
+                                stroke="currentColor"
+                                strokeWidth="10"
+                                strokeLinecap="round"
+                                className="text-teal-500 group-hover:text-teal-600 transition-colors duration-300"
+                              />
+
+                              <line
+                                x1="262"
+                                y1="112"
+                                x2="462"
+                                y2="112"
+                                stroke="currentColor"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                className="text-zinc-300"
+                              />
+
+                              <line
+                                x1="58"
+                                y1="98"
+                                x2="58"
+                                y2="126"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                className="text-zinc-400"
+                              />
+
+                              <line
+                                x1="260"
+                                y1="92"
+                                x2="260"
+                                y2="132"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="text-teal-600"
+                              />
+
+                              <line
+                                x1="462"
+                                y1="98"
+                                x2="462"
+                                y2="126"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                className="text-zinc-400"
+                              />
+
+                              <circle
+                                cx="260"
+                                cy="112"
+                                r="12"
+                                className="fill-white stroke-teal-500 group-hover:stroke-teal-600 transition-colors duration-300"
+                                strokeWidth="4"
+                              />
+
+                              <circle
+                                cx="260"
+                                cy="112"
+                                r="4"
+                                className="fill-teal-600"
+                              />
+
+                              <text
+                                x="58"
+                                y="84"
+                                textAnchor="middle"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
                                 UNDERSTAFFED
                               </text>
 
-                              <text x="260" y="77" textAnchor="middle" className="fill-teal-700 font-bold" style={{ fontSize: "10px", letterSpacing: "0.8px" }}>
+                              <text
+                                x="260"
+                                y="78"
+                                textAnchor="middle"
+                                className="fill-teal-700 font-bold"
+                                style={{
+                                  fontSize: "9px",
+                                  letterSpacing: "0.7px",
+                                }}
+                              >
                                 BALANCED
                               </text>
 
-                              <text x="465" y="77" textAnchor="end" className="fill-zinc-700 font-semibold" style={{ fontSize: "10px", letterSpacing: "0.7px" }}>
+                              <text
+                                x="462"
+                                y="84"
+                                textAnchor="middle"
+                                className="fill-zinc-600 font-semibold"
+                                style={{
+                                  fontSize: "8px",
+                                  letterSpacing: "0.6px",
+                                }}
+                              >
                                 OVERSTAFFED
                               </text>
 
-                              <text x="55" y="151" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
-                                STORE REQUIREMENT
+                              <path
+                                d="M 88 156 C 135 142, 175 142, 218 156"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.2"
+                                className="text-zinc-300"
+                              />
+
+                              <path
+                                d="M 302 156 C 345 142, 385 142, 432 156"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.2"
+                                className="text-zinc-300"
+                              />
+
+                              <text
+                                x="155"
+                                y="181"
+                                textAnchor="middle"
+                                className="fill-zinc-400"
+                                style={{ fontSize: "8px", letterSpacing: "0.5px" }}
+                              >
+                                HEADCOUNT GAP
                               </text>
 
-                              <text x="260" y="151" textAnchor="middle" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
-                                MANPOWER
+                              <text
+                                x="365"
+                                y="181"
+                                textAnchor="middle"
+                                className="fill-zinc-400"
+                                style={{ fontSize: "8px", letterSpacing: "0.5px" }}
+                              >
+                                COST PRESSURE
                               </text>
 
-                              <text x="465" y="151" textAnchor="end" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
-                                EMPLOYEE COST
-                              </text>
+                              <rect
+                                x="167"
+                                y="204"
+                                width="186"
+                                height="30"
+                                rx="8"
+                                className="fill-zinc-900 group-hover:fill-teal-700 transition-colors duration-300"
+                              />
 
-                              <path d="M 110 166 C 150 166, 180 166, 215 166" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-300" />
-                              <path d="M 305 166 C 340 166, 370 166, 410 166" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-300" />
-                              <circle cx="110" cy="166" r="3" className="fill-zinc-300" />
-                              <circle cx="410" cy="166" r="3" className="fill-zinc-300" />
-
-                              <rect x="150" y="194" width="220" height="30" rx="8" className="fill-white stroke-zinc-200" strokeWidth="1" />
-
-                              <text x="260" y="213" textAnchor="middle" className="fill-zinc-600 font-medium" style={{ fontSize: "9px" }}>
-                                Workforce planning scenario
+                              <text
+                                x="260"
+                                y="223"
+                                textAnchor="middle"
+                                className="fill-white font-semibold"
+                                style={{
+                                  fontSize: "9px",
+                                  letterSpacing: "0.5px",
+                                }}
+                              >
+                                3 SCENARIOS · WORKFORCE PLANNING
                               </text>
                             </svg>
                           </div>
@@ -1305,7 +1461,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                         </div>
                       </div>
                     </div>
-                  ) : null)}
+                  )}
                 </div>
 
                 {/* Card Footer */}
