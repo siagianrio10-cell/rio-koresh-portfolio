@@ -1305,7 +1305,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                         </div>
                       </div>
                     </div>
-                  )              )}
+                  )}
                 </div>
 
                 {/* Card Footer */}
