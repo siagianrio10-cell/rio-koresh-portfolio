@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
 import { PositioningStatement } from "./components/PositioningStatement";
 import { ExperienceSection } from "./components/ExperienceSection";
 import { FeaturedProjects } from "./components/FeaturedProjects";
@@ -102,34 +101,28 @@ export default function App() {
         </main>
       ) : (
         <main>
-          {/* 1. About Me (now at the top) */}
+          {/* 1. About Me (top of page, includes Featured Case Study card) */}
           <div id="home">
             <AboutSection
               onOpenCV={() => setIsCVModalOpen(true)}
               onExploreProjects={() => handleNavigate("projects")}
+              onOpenCaseStudy={handleOpenCaseStudy}
             />
           </div>
 
-          {/* 2. Hero Section */}
-          <Hero
-            onExploreProjects={() => handleNavigate("projects")}
-            onViewExperience={() => handleNavigate("experience")}
-            onOpenCaseStudy={handleOpenCaseStudy}
-          />
-
-          {/* 3. How I Work / Positioning */}
+          {/* 2. How I Work / Positioning */}
           <PositioningStatement />
 
-          {/* 4. Experience Overview Timeline */}
+          {/* 3. Experience Overview Timeline */}
           <ExperienceSection onSelectProject={handleOpenCaseStudy} />
 
-          {/* 5. Featured Projects with 6 Interactive Case Studies */}
+          {/* 4. Featured Projects with 6 Interactive Case Studies */}
           <FeaturedProjects onOpenCaseStudy={handleOpenCaseStudy} />
 
-          {/* 6. HR Capabilities / Practice Areas */}
+          {/* 5. HR Capabilities / Practice Areas */}
           <CapabilitiesSection />
 
-          {/* 7. Professional Contact CTA */}
+          {/* 6. Professional Contact CTA */}
           <ContactSection onOpenCV={() => setIsCVModalOpen(true)} />
         </main>
       )}
