@@ -101,17 +101,16 @@ export default function App() {
         </main>
       ) : (
         <main>
-          {/* 1. About Me (top of page, includes Featured Case Study card) */}
+          {/* 1. About Me (top of page) */}
           <div id="home">
             <AboutSection
               onOpenCV={() => setIsCVModalOpen(true)}
               onExploreProjects={() => handleNavigate("projects")}
-              onOpenCaseStudy={handleOpenCaseStudy}
             />
           </div>
 
-          {/* 2. How I Work / Positioning */}
-          <PositioningStatement />
+          {/* 2. How I Work / Positioning (includes Featured Case Study card) */}
+          <PositioningStatement onOpenCaseStudy={handleOpenCaseStudy} />
 
           {/* 3. Experience Overview Timeline */}
           <ExperienceSection onSelectProject={handleOpenCaseStudy} />
