@@ -1321,4 +1321,4 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
       </div>
     </section>
   );
-};
+) : null)}
