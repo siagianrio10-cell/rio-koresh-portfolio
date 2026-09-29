@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import {
   Calendar,
   MapPin,
-  ChevronDown,
-  ChevronUp,
   ArrowUpRight,
+  ChevronRight,
 } from "lucide-react";
 import { EXPERIENCES } from "../data/portfolioData";
 
@@ -15,7 +14,12 @@ interface ExperienceSectionProps {
 export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   onSelectProject,
 }) => {
-  const [expandedId, setExpandedId] = useState<string>("pepito");
+  const [selectedId, setSelectedId] = useState<string>("pepito");
+
+  const selectedExperience =
+    EXPERIENCES.find((exp) => exp.id === selectedId) ?? EXPERIENCES[0];
+
+  if (!selectedExperience) return null;
 
   return (
     <section
@@ -32,194 +36,234 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900">
-            Professional Experience Timeline
+            Where the work happened.
           </h2>
 
           <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
-            Hands-on experience across talent management, end-to-end HR
-            operations, psychological assessment, and training delivery.
+            Experience across talent management, HR operations, psychological
+            assessment, recruitment, and people development.
           </p>
         </div>
 
-        {/* Visual Timeline Layout */}
-        <div className="relative border-l border-zinc-200 ml-3 sm:ml-6 pl-6 sm:pl-10 space-y-10">
-          {EXPERIENCES.map((exp) => {
-            const isExpanded = expandedId === exp.id;
-            const isCurrent = exp.period.includes("Present");
+        {/* Career Path */}
+        <div className="relative">
+          {/* Desktop path line */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute left-[16.67%] right-[16.67%] top-[38px] h-px bg-zinc-200"
+          />
 
-            return (
-              <div key={exp.id} className="relative group">
-                {/* Timeline Dot Indicator */}
-                <span
-                  className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 bg-white transition-all duration-300 ${
-                    isCurrent
-                      ? "border-blue-600 ring-4 ring-blue-50"
-                      : "border-zinc-400 group-hover:border-zinc-700"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-8">
+            {EXPERIENCES.map((exp, index) => {
+              const isSelected = selectedId === exp.id;
+              const isCurrent = exp.period.includes("Present");
+
+              return (
+                <button
+                  key={exp.id}
+                  type="button"
+                  onClick={() => setSelectedId(exp.id)}
+                  className={`group relative text-left rounded-xl md:rounded-none md:bg-transparent transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 ${
+                    isSelected
+                      ? "bg-zinc-50 border border-zinc-200 md:border-0"
+                      : "bg-white border border-zinc-100 md:border-0"
                   }`}
-                />
-
-                {/* Experience Card */}
-                <div className="bg-zinc-50/70 hover:bg-white border border-zinc-200/90 hover:border-zinc-300 rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-0.5">
-                  <div
-                    onClick={() =>
-                      setExpandedId(isExpanded ? "" : exp.id)
-                    }
-                    className="cursor-pointer flex flex-col sm:flex-row sm:items-start justify-between gap-4"
-                  >
-                    {/* Company Information */}
-                    <div className="flex items-start gap-4 min-w-0">
-                      {/* Company Logo */}
-                      <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white border border-zinc-200 flex items-center justify-center overflow-hidden shadow-sm">
-                        <img
-                          src={exp.logo}
-                          alt={`${exp.company} logo`}
-                          className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
-                        />
+                >
+                  <div className="p-4 md:p-0">
+                    {/* Node */}
+                    <div className="flex items-center gap-3 md:block">
+                      <div
+                        className={`relative z-10 flex items-center justify-center w-10 h-10 rounded-full border text-[11px] font-mono font-semibold transition-all duration-300 ${
+                          isSelected
+                            ? "bg-zinc-900 text-white border-zinc-900"
+                            : isCurrent
+                              ? "bg-white text-blue-700 border-blue-500"
+                              : "bg-white text-zinc-500 border-zinc-300 group-hover:border-zinc-700"
+                        }`}
+                      >
+                        {String(index + 1).padStart(2, "0")}
                       </div>
 
-                      {/* Company & Role */}
-                      <div className="min-w-0">
+                      <div className="min-w-0 md:pt-5">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-lg font-semibold text-zinc-900 tracking-tight">
+                          <span
+                            className={`text-sm font-semibold tracking-tight transition-colors ${
+                              isSelected
+                                ? "text-zinc-900"
+                                : "text-zinc-700 group-hover:text-zinc-900"
+                            }`}
+                          >
                             {exp.company}
-                          </h3>
+                          </span>
 
                           {isCurrent && (
-                            <span className="text-[11px] font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                              Current Role
+                            <span className="text-[10px] font-medium text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                              Current
                             </span>
                           )}
                         </div>
 
-                        <div className="text-sm font-medium text-blue-900 mt-0.5">
+                        <div className="text-xs text-blue-900 mt-1">
                           {exp.role}
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 mt-2">
-                          <span className="flex items-center gap-1 font-mono">
-                            <Calendar className="w-3.5 h-3.5 text-zinc-400" />
-                            {exp.period}
-                          </span>
-
-                          <span aria-hidden="true">·</span>
-
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                            {exp.location}
-                          </span>
+                        <div className="text-[10px] font-mono text-zinc-400 mt-1">
+                          {exp.period}
                         </div>
                       </div>
-                    </div>
 
-                    {/* Expand Control */}
-                    <div className="flex items-center gap-2 self-end sm:self-start shrink-0">
-                      <span className="text-xs text-zinc-500 font-medium hidden sm:inline">
-                        {isExpanded ? "Collapse Focus" : "View Focus"}
-                      </span>
-
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4 text-zinc-500" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 text-zinc-500" />
-                      )}
+                      <ChevronRight
+                        className={`ml-auto md:hidden w-4 h-4 transition-transform ${
+                          isSelected
+                            ? "text-zinc-700 translate-x-0.5"
+                            : "text-zinc-300"
+                        }`}
+                      />
                     </div>
                   </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-                  {/* Concise Role Description */}
-                  <p className="text-xs sm:text-sm text-zinc-600 mt-4 leading-relaxed">
-                    {exp.description}
-                  </p>
+        {/* Selected Experience */}
+        <div className="relative border-t border-zinc-200/80 pt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8 lg:gap-12">
+            {/* Identity Rail */}
+            <div className="space-y-4">
+              <div className="w-14 h-14 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-center overflow-hidden">
+                <img
+                  src={selectedExperience.logo}
+                  alt={`${selectedExperience.company} logo`}
+                  className="w-10 h-10 object-contain"
+                />
+              </div>
 
-                  {/* Expanded Focus Areas & Capabilities */}
-                  {isExpanded && (
-                    <div className="mt-5 pt-4 border-t border-zinc-200/80 space-y-4">
-                      <div className="text-xs font-semibold text-zinc-700 uppercase tracking-wider">
-                        Core Functional Focus Areas:
-                      </div>
+              <div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400">
+                  Selected Experience
+                </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        {exp.focus.map((item, idx) => (
-                          <span
-                            key={idx}
-                            className="text-xs bg-white text-zinc-700 px-3 py-1.5 rounded-lg border border-zinc-200/90 font-medium"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Associated Case Study Hook */}
-                      {exp.id === "pepito" && onSelectProject && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
-                          <span className="text-zinc-500">
-                            Related Case Studies:
-                          </span>
-
-                          <button
-                            onClick={() =>
-                              onSelectProject("project-01")
-                            }
-                            className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
-                          >
-                            Project 01 (Talent Dashboard)
-                            <ArrowUpRight className="w-3 h-3" />
-                          </button>
-
-                          <span className="text-zinc-300">·</span>
-
-                          <button
-                            onClick={() =>
-                              onSelectProject("project-02")
-                            }
-                            className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
-                          >
-                            Project 02 (Internal Mobility)
-                            <ArrowUpRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
-
-                      {exp.id === "dni" && onSelectProject && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
-                          <span className="text-zinc-500">
-                            Related Case Study:
-                          </span>
-
-                          <button
-                            onClick={() =>
-                              onSelectProject("project-05")
-                            }
-                            className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
-                          >
-                            Project 05 (HR Operations Control Center)
-                            <ArrowUpRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
-
-                      {exp.id === "lpt" && onSelectProject && (
-                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
-                          <span className="text-zinc-500">
-                            Related Case Study:
-                          </span>
-
-                          <button
-                            onClick={() =>
-                              onSelectProject("project-04")
-                            }
-                            className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
-                          >
-                            Project 04 (Recruitment &amp; Selection)
-                            <ArrowUpRight className="w-3 h-3" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                <div className="text-xs text-zinc-500 mt-1">
+                  {selectedExperience.location}
                 </div>
               </div>
-            );
-          })}
+            </div>
+
+            {/* Detail */}
+            <div className="space-y-6 min-w-0">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900">
+                    {selectedExperience.role}
+                  </h3>
+
+                  <div className="text-base font-medium text-blue-900 mt-1">
+                    {selectedExperience.company}
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 shrink-0">
+                  <span className="flex items-center gap-1.5 font-mono">
+                    <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                    {selectedExperience.period}
+                  </span>
+
+                  <span aria-hidden="true">·</span>
+
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-zinc-400" />
+                    {selectedExperience.location}
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 xl:grid-cols-[1fr_280px] gap-8 xl:gap-12 items-start">
+                <div className="space-y-5">
+                  <p className="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-3xl">
+                    {selectedExperience.description}
+                  </p>
+
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-2">
+                      Functional Focus
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {selectedExperience.focus.map((item, index) => (
+                        <span
+                          key={`${selectedExperience.id}-${index}`}
+                          className="text-xs text-zinc-700 bg-zinc-50 px-2.5 py-1.5 rounded-lg border border-zinc-200/80"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Project Links */}
+                <div className="border-l-0 xl:border-l border-zinc-200/80 xl:pl-7">
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-3">
+                    Related Work
+                  </div>
+
+                  {selectedExperience.id === "pepito" && onSelectProject && (
+                    <div className="space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => onSelectProject("project-01")}
+                        className="w-full text-left text-xs text-blue-700 hover:text-blue-900 inline-flex items-center justify-between gap-3 py-2 group/link"
+                      >
+                        <span>Project 01 · Talent Dashboard</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => onSelectProject("project-02")}
+                        className="w-full text-left text-xs text-blue-700 hover:text-blue-900 inline-flex items-center justify-between gap-3 py-2 group/link"
+                      >
+                        <span>Project 02 · Internal Mobility</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      </button>
+                    </div>
+                  )}
+
+                  {selectedExperience.id === "dni" && onSelectProject && (
+                    <button
+                      type="button"
+                      onClick={() => onSelectProject("project-05")}
+                      className="w-full text-left text-xs text-blue-700 hover:text-blue-900 inline-flex items-center justify-between gap-3 py-2 group/link"
+                    >
+                      <span>Project 05 · HR Generalist & HRGA</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    </button>
+                  )}
+
+                  {selectedExperience.id === "lpt" && onSelectProject && (
+                    <button
+                      type="button"
+                      onClick={() => onSelectProject("project-04")}
+                      className="w-full text-left text-xs text-blue-700 hover:text-blue-900 inline-flex items-center justify-between gap-3 py-2 group/link"
+                    >
+                      <span>Project 04 · Recruitment & Selection</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    </button>
+                  )}
+
+                  {selectedExperience.id !== "pepito" &&
+                    selectedExperience.id !== "dni" &&
+                    selectedExperience.id !== "lpt" && (
+                      <div className="text-xs text-zinc-400">
+                        Experience details
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
