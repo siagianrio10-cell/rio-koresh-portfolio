@@ -1209,32 +1209,103 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
                     </div>
 
                   /* ===================================================== */
-                  /* PROJECT 06 — EXISTING ARTIFACT                      */
+                  /* PROJECT 06 — WORKFORCE PLANNING & EMPLOYEE COST         */
                   /* ===================================================== */
-                  ) : (
-                    <div className="p-3.5 bg-zinc-50 group-hover:bg-zinc-100/70 rounded-xl border border-zinc-200/70 transition-colors space-y-1.5">
-                      <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1.5 font-medium text-zinc-700">
+                  ) : project.id === "project-06" ? (
+                    <div className="pt-2">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-700">
                           {getProjectIcon(project.id)}
-                          <span>Interactive Artifact</span>
+                          <span>Workforce Planning</span>
                         </div>
 
-                        <span className="text-[11px] font-mono text-zinc-400">
-                          Interactive
+                        <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-400">
+                          Scenario view
                         </span>
                       </div>
 
-                      <div className="flex items-baseline justify-between pt-1">
-                        <span className="text-base sm:text-lg font-bold font-mono text-zinc-900 tabular-nums">
-                          {project.headlineMetric}
-                        </span>
+                      <div className="relative rounded-xl border border-zinc-200/80 bg-[#F8FAFC] overflow-hidden">
+                        <div
+                          className="absolute inset-0 opacity-30"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(to right, rgba(161,161,170,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(161,161,170,0.12) 1px, transparent 1px)",
+                            backgroundSize: "32px 32px",
+                          }}
+                        />
 
-                        <span className="text-[11px] text-zinc-500 text-right">
-                          {project.metricLabel}
-                        </span>
+                        <div className="relative px-3 sm:px-4 py-4">
+                          <div className="relative h-[225px] sm:h-[235px]">
+                            <svg
+                              viewBox="0 0 520 250"
+                              className="w-full h-full"
+                              preserveAspectRatio="xMidYMid meet"
+                              aria-label="Workforce planning scenarios from understaffed to overstaffed"
+                            >
+                              <text x="28" y="28" className="fill-zinc-400" style={{ fontSize: "9px", letterSpacing: "1.2px" }}>
+                                WORKFORCE BALANCE
+                              </text>
+
+                              <text x="492" y="28" textAnchor="end" className="fill-zinc-400" style={{ fontSize: "9px", letterSpacing: "1px" }}>
+                                HEADCOUNT · COST
+                              </text>
+
+                              <line x1="55" y1="105" x2="465" y2="105" stroke="currentColor" strokeWidth="2" className="text-zinc-200" />
+                              <line x1="55" y1="105" x2="185" y2="105" stroke="currentColor" strokeWidth="5" strokeLinecap="round" className="text-zinc-300" />
+                              <line x1="185" y1="105" x2="335" y2="105" stroke="currentColor" strokeWidth="6" strokeLinecap="round" className="text-teal-500" />
+                              <line x1="335" y1="105" x2="465" y2="105" stroke="currentColor" strokeWidth="5" strokeLinecap="round" className="text-zinc-300" />
+
+                              <circle cx="55" cy="105" r="8" className="fill-zinc-500" />
+                              <circle cx="260" cy="105" r="12" className="fill-teal-600 group-hover:fill-teal-700 transition-colors duration-300" />
+                              <circle cx="465" cy="105" r="8" className="fill-zinc-500" />
+                              <circle cx="260" cy="105" r="21" fill="none" stroke="currentColor" strokeWidth="1" className="text-teal-200" />
+
+                              <text x="55" y="77" textAnchor="start" className="fill-zinc-700 font-semibold" style={{ fontSize: "10px", letterSpacing: "0.7px" }}>
+                                UNDERSTAFFED
+                              </text>
+
+                              <text x="260" y="77" textAnchor="middle" className="fill-teal-700 font-bold" style={{ fontSize: "10px", letterSpacing: "0.8px" }}>
+                                BALANCED
+                              </text>
+
+                              <text x="465" y="77" textAnchor="end" className="fill-zinc-700 font-semibold" style={{ fontSize: "10px", letterSpacing: "0.7px" }}>
+                                OVERSTAFFED
+                              </text>
+
+                              <text x="55" y="151" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
+                                STORE REQUIREMENT
+                              </text>
+
+                              <text x="260" y="151" textAnchor="middle" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
+                                MANPOWER
+                              </text>
+
+                              <text x="465" y="151" textAnchor="end" className="fill-zinc-400" style={{ fontSize: "8px", letterSpacing: "1px" }}>
+                                EMPLOYEE COST
+                              </text>
+
+                              <path d="M 110 166 C 150 166, 180 166, 215 166" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-300" />
+                              <path d="M 305 166 C 340 166, 370 166, 410 166" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-300" />
+                              <circle cx="110" cy="166" r="3" className="fill-zinc-300" />
+                              <circle cx="410" cy="166" r="3" className="fill-zinc-300" />
+
+                              <rect x="150" y="194" width="220" height="30" rx="8" className="fill-white stroke-zinc-200" strokeWidth="1" />
+
+                              <text x="260" y="213" textAnchor="middle" className="fill-zinc-600 font-medium" style={{ fontSize: "9px" }}>
+                                Workforce planning scenario
+                              </text>
+                            </svg>
+                          </div>
+
+                          <div className="border-t border-zinc-200/80 pt-3 mt-1 text-center">
+                            <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-400">
+                              Matching workforce requirements with employee cost
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  )}
+                  )              )}
                 </div>
 
                 {/* Card Footer */}
