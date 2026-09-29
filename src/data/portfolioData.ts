@@ -1,3 +1,9 @@
+import pepitoLogo from "../assets/images/pepito.png";
+import dniLogo from "../assets/images/dni.png";
+import crekidsLogo from "../assets/images/crekids.png";
+import lptLogo from "../assets/images/lpt.png";
+import hrPublikLogo from "../assets/images/hr-publik.png";
+
 export interface ExperienceItem {
   id: string;
   company: string;
@@ -7,6 +13,7 @@ export interface ExperienceItem {
   tagline: string;
   focus: string[];
   description: string;
+  logo: string;
 }
 
 export interface ProjectSummary {
@@ -43,6 +50,7 @@ export const PROFILE = {
 export const EXPERIENCES: ExperienceItem[] = [
   {
     id: "pepito",
+    logo: pepitoLogo,
     company: "PEPITO SUPERMARKET",
     role: "Talent Management Staff",
     period: "Nov 2025 – Present",
@@ -64,6 +72,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: "dni",
+    logo: dniLogo,
     company: "DNI SKIN CENTRE INDONESIA",
     role: "HR Generalist",
     period: "Aug 2025 – Nov 2025",
@@ -86,6 +95,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: "lpt",
+    logo: lptLogo,
     company: "LPT (LEMBAGA PSIKOLOGI TERAPAN) INDONESIA",
     role: "HR Consultant & Assistant Psychologist",
     period: "Feb 2024 – Jul 2024",
@@ -105,6 +115,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: "crekids",
+    logo: crekidsLogo,
     company: "CREKIDS",
     role: "Trainer",
     period: "Aug 2024 – Jul 2025",
@@ -122,6 +133,7 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: "hr-publik",
+    logo: hrPublikLogo,
     company: "HR PUBLIK",
     role: "Trainer (Project Based)",
     period: "Oct 2024 – Dec 2024",
