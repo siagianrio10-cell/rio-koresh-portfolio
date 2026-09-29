@@ -1,16 +1,27 @@
 import React, { useState } from "react";
-import { Briefcase, Calendar, MapPin, ChevronDown, ChevronUp, ArrowUpRight } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  ChevronDown,
+  ChevronUp,
+  ArrowUpRight,
+} from "lucide-react";
 import { EXPERIENCES } from "../data/portfolioData";
 
 interface ExperienceSectionProps {
   onSelectProject?: (projectId: string) => void;
 }
 
-export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectProject }) => {
+export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
+  onSelectProject,
+}) => {
   const [expandedId, setExpandedId] = useState<string>("pepito");
 
   return (
-    <section id="experience" className="py-20 sm:py-24 border-b border-zinc-200/80 bg-white">
+    <section
+      id="experience"
+      className="py-20 sm:py-24 border-b border-zinc-200/80 bg-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3">
@@ -19,11 +30,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
             <span aria-hidden="true">·</span>
             <span>Applied HR Experience</span>
           </div>
+
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900">
             Professional Experience Timeline
           </h2>
+
           <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
-            Hands-on experience across talent management, end-to-end HR operations, psychological assessment, and training delivery.
+            Hands-on experience across talent management, end-to-end HR
+            operations, psychological assessment, and training delivery.
           </p>
         </div>
 
@@ -37,7 +51,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
               <div key={exp.id} className="relative group">
                 {/* Timeline Dot Indicator */}
                 <span
-                  className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 bg-white transition-colors ${
+                  className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-3.5 h-3.5 rounded-full border-2 bg-white transition-all duration-300 ${
                     isCurrent
                       ? "border-blue-600 ring-4 ring-blue-50"
                       : "border-zinc-400 group-hover:border-zinc-700"
@@ -45,45 +59,64 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
                 />
 
                 {/* Experience Card */}
-                <div className="bg-zinc-50/70 hover:bg-zinc-50 border border-zinc-200/90 rounded-2xl p-5 sm:p-7 transition-all">
+                <div className="bg-zinc-50/70 hover:bg-white border border-zinc-200/90 hover:border-zinc-300 rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-0.5">
                   <div
-                    onClick={() => setExpandedId(isExpanded ? "" : exp.id)}
-                    className="cursor-pointer flex flex-col sm:flex-row sm:items-start justify-between gap-3"
+                    onClick={() =>
+                      setExpandedId(isExpanded ? "" : exp.id)
+                    }
+                    className="cursor-pointer flex flex-col sm:flex-row sm:items-start justify-between gap-4"
                   >
-                    <div>
+                    {/* Company Information */}
+                    <div className="flex items-start gap-4 min-w-0">
+                      {/* Company Logo */}
+                      <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white border border-zinc-200 flex items-center justify-center overflow-hidden shadow-sm">
+                        <img
+                          src={exp.logo}
+                          alt={`${exp.company} logo`}
+                          className="w-9 h-9 sm:w-11 sm:h-11 object-contain"
+                        />
+                      </div>
+
                       {/* Company & Role */}
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-lg font-semibold text-zinc-900 tracking-tight">
-                          {exp.company}
-                        </h3>
-                        {isCurrent && (
-                          <span className="text-[11px] font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                            Current Role
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="text-lg font-semibold text-zinc-900 tracking-tight">
+                            {exp.company}
+                          </h3>
+
+                          {isCurrent && (
+                            <span className="text-[11px] font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                              Current Role
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="text-sm font-medium text-blue-900 mt-0.5">
+                          {exp.role}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 mt-2">
+                          <span className="flex items-center gap-1 font-mono">
+                            <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                            {exp.period}
                           </span>
-                        )}
-                      </div>
 
-                      <div className="text-sm font-medium text-blue-900 mt-0.5">
-                        {exp.role}
-                      </div>
+                          <span aria-hidden="true">·</span>
 
-                      <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 mt-2">
-                        <span className="flex items-center gap-1 font-mono">
-                          <Calendar className="w-3.5 h-3.5 text-zinc-400" />
-                          {exp.period}
-                        </span>
-                        <span aria-hidden="true">·</span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                          {exp.location}
-                        </span>
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5 text-zinc-400" />
+                            {exp.location}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 self-end sm:self-start">
+                    {/* Expand Control */}
+                    <div className="flex items-center gap-2 self-end sm:self-start shrink-0">
                       <span className="text-xs text-zinc-500 font-medium hidden sm:inline">
                         {isExpanded ? "Collapse Focus" : "View Focus"}
                       </span>
+
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4 text-zinc-500" />
                       ) : (
@@ -93,16 +126,17 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
                   </div>
 
                   {/* Concise Role Description */}
-                  <p className="text-xs sm:text-sm text-zinc-600 mt-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-600 mt-4 leading-relaxed">
                     {exp.description}
                   </p>
 
                   {/* Expanded Focus Areas & Capabilities */}
                   {isExpanded && (
-                    <div className="mt-5 pt-4 border-t border-zinc-200/80 space-y-3">
+                    <div className="mt-5 pt-4 border-t border-zinc-200/80 space-y-4">
                       <div className="text-xs font-semibold text-zinc-700 uppercase tracking-wider">
                         Core Functional Focus Areas:
                       </div>
+
                       <div className="flex flex-wrap gap-2">
                         {exp.focus.map((item, idx) => (
                           <span
@@ -116,18 +150,27 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
 
                       {/* Associated Case Study Hook */}
                       {exp.id === "pepito" && onSelectProject && (
-                        <div className="pt-2 flex items-center gap-2 text-xs">
-                          <span className="text-zinc-500">Related Case Studies:</span>
+                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
+                          <span className="text-zinc-500">
+                            Related Case Studies:
+                          </span>
+
                           <button
-                            onClick={() => onSelectProject("project-01")}
+                            onClick={() =>
+                              onSelectProject("project-01")
+                            }
                             className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
                           >
                             Project 01 (Talent Dashboard)
                             <ArrowUpRight className="w-3 h-3" />
                           </button>
+
                           <span className="text-zinc-300">·</span>
+
                           <button
-                            onClick={() => onSelectProject("project-02")}
+                            onClick={() =>
+                              onSelectProject("project-02")
+                            }
                             className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
                           >
                             Project 02 (Internal Mobility)
@@ -137,10 +180,15 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
                       )}
 
                       {exp.id === "dni" && onSelectProject && (
-                        <div className="pt-2 flex items-center gap-2 text-xs">
-                          <span className="text-zinc-500">Related Case Study:</span>
+                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
+                          <span className="text-zinc-500">
+                            Related Case Study:
+                          </span>
+
                           <button
-                            onClick={() => onSelectProject("project-05")}
+                            onClick={() =>
+                              onSelectProject("project-05")
+                            }
                             className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
                           >
                             Project 05 (HR Operations Control Center)
@@ -150,10 +198,15 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ onSelectPr
                       )}
 
                       {exp.id === "lpt" && onSelectProject && (
-                        <div className="pt-2 flex items-center gap-2 text-xs">
-                          <span className="text-zinc-500">Related Case Study:</span>
+                        <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
+                          <span className="text-zinc-500">
+                            Related Case Study:
+                          </span>
+
                           <button
-                            onClick={() => onSelectProject("project-04")}
+                            onClick={() =>
+                              onSelectProject("project-04")
+                            }
                             className="text-blue-600 font-medium hover:underline inline-flex items-center gap-0.5 cursor-pointer"
                           >
                             Project 04 (Recruitment &amp; Selection)
