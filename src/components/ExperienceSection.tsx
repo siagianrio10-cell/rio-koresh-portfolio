@@ -1,8 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Calendar,
   MapPin,
   ArrowUpRight,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { EXPERIENCES, ExperienceItem } from "../data/portfolioData";
 
@@ -12,6 +15,30 @@ interface ExperienceSectionProps {
 
 type ExperienceWithLogo = ExperienceItem & {
   logo?: string;
+};
+
+type Photo = { src: string; caption: string };
+
+// Field photos per experience id (files live in /public/experience)
+const EXPERIENCE_PHOTOS: Record<string, Photo[]> = {
+  lpt: [
+    { src: "/experience/lpt-assessor.webp", caption: "Assessor · LPT Indonesia" },
+    {
+      src: "/experience/lpt-bi-scholarship.webp",
+      caption: "Facilitator, Bank Indonesia scholarship selection (200+ participants) · LPT Indonesia",
+    },
+    {
+      src: "/experience/lpt-facilitator.webp",
+      caption: "Facilitating a large-scale selection session · LPT Indonesia",
+    },
+    { src: "/experience/lpt-team.webp", caption: "Assessment team · LPT Indonesia" },
+  ],
+  dni: [{ src: "/experience/dni-onboarding.webp", caption: "Onboarding session · DNI" }],
+  "hr-publik": [
+    { src: "/experience/hr-publik-outbound.webp", caption: "Outbound training · HR Publik" },
+  ],
+  crekids: [{ src: "/experience/crekids-trainer.webp", caption: "Trainer team · Crekids" }],
+  pepito: [{ src: "/experience/pepito-hclga.webp", caption: "HCLGA team · Pepito" }],
 };
 
 const MONTHS: Record<string, number> = {
@@ -76,11 +103,33 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
       ""
   );
 
+  // Lightbox state
+  const [lightbox, setLightbox] = useState<{ photos: Photo[]; index: number } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight")
+        setLightbox((lb) => (lb ? { ...lb, index: (lb.index + 1) % lb.photos.length } : lb));
+      if (e.key === "ArrowLeft")
+        setLightbox((lb) =>
+          lb ? { ...lb, index: (lb.index - 1 + lb.photos.length) % lb.photos.length } : lb
+        );
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox]);
+
   const selectedExperience =
     chronologicalExperiences.find((exp) => exp.id === selectedId) ??
     chronologicalExperiences[0];
 
   if (!selectedExperience) return null;
+
+  const photos = EXPERIENCE_PHOTOS[selectedExperience.id] ?? [];
 
   return (
     <section
@@ -289,7 +338,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
 
               <div className="grid grid-cols-1 xl:grid-cols-[1fr_280px] gap-8 xl:gap-12 items-start">
 
-                {/* Description + Focus */}
+                {/* Description + Focus + Photos */}
                 <div className="space-y-6">
 
                   <p className="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-3xl">
@@ -312,6 +361,36 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                       ))}
                     </div>
                   </div>
+
+                  {/* ---------------------------------------------- */}
+                  {/* FIELD PHOTOS                                   */}
+                  {/* ---------------------------------------------- */}
+                  {photos.length > 0 && (
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 mb-2">
+                        From the Field
+                      </div>
+
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-3xl">
+                        {photos.map((photo, i) => (
+                          <button
+                            key={photo.src}
+                            type="button"
+                            onClick={() => setLightbox({ photos, index: i })}
+                            aria-label={`Open photo: ${photo.caption}`}
+                            className="group/photo relative aspect-[4/3] overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
+                          >
+                            <img
+                              src={photo.src}
+                              alt={photo.caption}
+                              loading="lazy"
+                              className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/photo:scale-105"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* ------------------------------------------------ */}
@@ -402,6 +481,81 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
         </div>
 
       </div>
+
+      {/* ====================================================== */}
+      {/* LIGHTBOX                                               */}
+      {/* ====================================================== */}
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo viewer"
+          className="fixed inset-0 z-[100] bg-black/85 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label="Close photo viewer"
+            className="absolute top-4 right-4 p-2 rounded-full text-white/90 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {lightbox.photos.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox({
+                    ...lightbox,
+                    index: (lightbox.index - 1 + lightbox.photos.length) % lightbox.photos.length,
+                  });
+                }}
+                aria-label="Previous photo"
+                className="absolute left-3 sm:left-6 p-2 rounded-full text-white/90 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <ChevronLeft className="w-7 h-7" />
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox({
+                    ...lightbox,
+                    index: (lightbox.index + 1) % lightbox.photos.length,
+                  });
+                }}
+                aria-label="Next photo"
+                className="absolute right-3 sm:right-6 p-2 rounded-full text-white/90 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <ChevronRight className="w-7 h-7" />
+              </button>
+            </>
+          )}
+
+          <figure
+            className="max-w-4xl w-full flex flex-col items-center gap-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightbox.photos[lightbox.index].src}
+              alt={lightbox.photos[lightbox.index].caption}
+              className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain"
+            />
+            <figcaption className="text-sm text-white/90 text-center max-w-2xl">
+              {lightbox.photos[lightbox.index].caption}
+              {lightbox.photos.length > 1 && (
+                <span className="text-white/60 ml-2 font-mono text-xs">
+                  {lightbox.index + 1} / {lightbox.photos.length}
+                </span>
+              )}
+            </figcaption>
+          </figure>
+        </div>
+      )}
     </section>
   );
 };
