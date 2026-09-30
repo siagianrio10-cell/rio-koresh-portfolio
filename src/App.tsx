@@ -9,6 +9,7 @@ import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { CaseStudyView } from "./components/CaseStudyView";
 import { CVModal } from "./components/CVModal";
+import { Reveal } from "./components/Reveal";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -101,28 +102,40 @@ export default function App() {
         </main>
       ) : (
         <main>
-          {/* 1. About Me (top of page) */}
+          {/* 1. About Me (top of page) - animates on load via Reveal */}
           <div id="home">
-            <AboutSection
-              onOpenCV={() => setIsCVModalOpen(true)}
-              onExploreProjects={() => handleNavigate("projects")}
-            />
+            <Reveal y={16}>
+              <AboutSection
+                onOpenCV={() => setIsCVModalOpen(true)}
+                onExploreProjects={() => handleNavigate("projects")}
+              />
+            </Reveal>
           </div>
 
           {/* 2. How I Work / Positioning (includes Featured Case Study card) */}
-          <PositioningStatement onOpenCaseStudy={handleOpenCaseStudy} />
+          <Reveal>
+            <PositioningStatement onOpenCaseStudy={handleOpenCaseStudy} />
+          </Reveal>
 
           {/* 3. Experience Overview Timeline */}
-          <ExperienceSection onSelectProject={handleOpenCaseStudy} />
+          <Reveal>
+            <ExperienceSection onSelectProject={handleOpenCaseStudy} />
+          </Reveal>
 
           {/* 4. Featured Projects with 6 Interactive Case Studies */}
-          <FeaturedProjects onOpenCaseStudy={handleOpenCaseStudy} />
+          <Reveal>
+            <FeaturedProjects onOpenCaseStudy={handleOpenCaseStudy} />
+          </Reveal>
 
           {/* 5. HR Capabilities / Practice Areas */}
-          <CapabilitiesSection />
+          <Reveal>
+            <CapabilitiesSection />
+          </Reveal>
 
           {/* 6. Professional Contact CTA */}
-          <ContactSection onOpenCV={() => setIsCVModalOpen(true)} />
+          <Reveal>
+            <ContactSection onOpenCV={() => setIsCVModalOpen(true)} />
+          </Reveal>
         </main>
       )}
 
