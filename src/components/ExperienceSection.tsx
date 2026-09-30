@@ -103,6 +103,9 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
       ""
   );
 
+  // Pulse hint stops for good once the visitor taps any company
+  const [hasInteracted, setHasInteracted] = useState<boolean>(false);
+
   // Lightbox state
   const [lightbox, setLightbox] = useState<{ photos: Photo[]; index: number } | null>(null);
 
@@ -174,45 +177,63 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
             {chronologicalExperiences.map((exp, index) => {
               const isSelected = selectedId === exp.id;
               const isCurrent = exp.period.includes("Present");
+              const filledStyle = isSelected && !exp.logo;
+              const showPulse = !isSelected && !hasInteracted;
 
               return (
                 <button
                   key={exp.id}
                   type="button"
-                  onClick={() => setSelectedId(exp.id)}
+                  onClick={() => {
+                    setSelectedId(exp.id);
+                    setHasInteracted(true);
+                  }}
                   aria-pressed={isSelected}
-                  className="group text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-xl"
+                  className="group relative text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 rounded-xl"
                 >
                   {/* ------------------------------------------------ */}
                   {/* COMPANY LOGO CIRCLE                              */}
                   {/* ------------------------------------------------ */}
                   <div className="relative flex justify-center">
-                    <div
-                      className={`relative z-10 w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-full bg-white border flex items-center justify-center overflow-hidden transition-all duration-300 ${
-                        isSelected
-                          ? "border-zinc-900 ring-4 ring-zinc-100 shadow-sm"
-                          : isCurrent
-                            ? "border-blue-500 ring-4 ring-blue-50"
-                            : "border-zinc-200 group-hover:border-zinc-500"
-                      }`}
-                    >
-                      {exp.logo ? (
-                        <img
-                          src={exp.logo}
-                          alt={`${exp.company} logo`}
-                          className="w-10 h-10 sm:w-11 sm:h-11 object-contain"
-                        />
-                      ) : (
+                    <div className="relative">
+                      {/* Soft pulse ring (unselected only, stops after first tap) */}
+                      {showPulse && (
                         <span
-                          className={`text-xs sm:text-sm font-semibold tracking-tight ${
-                            isSelected
-                              ? "text-zinc-900"
-                              : "text-zinc-500 group-hover:text-zinc-800"
-                          }`}
-                        >
-                          {getCompanyInitials(exp.company)}
-                        </span>
+                          aria-hidden="true"
+                          style={{ animationDelay: `${index * 0.5}s` }}
+                          className="absolute inset-0 rounded-full border border-blue-400/60 animate-[ping_2.6s_cubic-bezier(0,0,0.2,1)_infinite] motion-reduce:hidden"
+                        />
                       )}
+
+                      <div
+                        className={`relative z-10 w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-full border flex items-center justify-center overflow-hidden transition-all duration-300 group-active:scale-95 ${
+                          filledStyle ? "bg-zinc-900" : "bg-white"
+                        } ${
+                          isSelected
+                            ? "border-zinc-900 ring-4 ring-zinc-200 shadow-md"
+                            : isCurrent
+                              ? "border-blue-500 ring-4 ring-blue-50 group-hover:-translate-y-0.5 group-hover:shadow-md"
+                              : "border-zinc-300 group-hover:border-zinc-500 group-hover:-translate-y-0.5 group-hover:shadow-md"
+                        }`}
+                      >
+                        {exp.logo ? (
+                          <img
+                            src={exp.logo}
+                            alt={`${exp.company} logo`}
+                            className="w-10 h-10 sm:w-11 sm:h-11 object-contain"
+                          />
+                        ) : (
+                          <span
+                            className={`text-xs sm:text-sm font-semibold tracking-tight ${
+                              isSelected
+                                ? "text-white"
+                                : "text-zinc-500 group-hover:text-zinc-800"
+                            }`}
+                          >
+                            {getCompanyInitials(exp.company)}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -254,6 +275,17 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({
                     <div className="inline-flex mt-2 text-[9px] font-medium text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                       Current
                     </div>
+                  )}
+
+                  {/* ------------------------------------------------ */}
+                  {/* MARKER LINKING SELECTED ITEM TO THE PANEL BELOW  */}
+                  {/* (desktop only, sits on the panel's top border)   */}
+                  {/* ------------------------------------------------ */}
+                  {isSelected && (
+                    <span
+                      aria-hidden="true"
+                      className="hidden md:block absolute left-1/2 -translate-x-1/2 -bottom-[53px] w-2.5 h-2.5 rotate-45 bg-zinc-900"
+                    />
                   )}
                 </button>
               );
