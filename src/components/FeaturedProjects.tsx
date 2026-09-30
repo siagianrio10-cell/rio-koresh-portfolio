@@ -96,7 +96,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({
           </div>
 
           {/* Interactive Filter Control Tabs */}
-          <div className="flex items-center gap-1 p-1 bg-zinc-200/60 rounded-lg self-start md:self-end overflow-x-auto">
+          <div className="flex items-center gap-1 p-1 bg-zinc-200/60 rounded-lg self-start md:self-end max-w-full overflow-x-auto">
             {filterOptions.map((opt) => (
               <button
                 key={opt.value}
