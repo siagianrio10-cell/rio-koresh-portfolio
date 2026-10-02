@@ -94,23 +94,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               <span>Bali</span>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
-              <span>About Me</span>
-            </div>
-
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 leading-snug">
-              A Psychology graduate working across different areas of HR.
+              Hi, I’m Rio. I like figuring things out.
             </h2>
 
             <div className="space-y-4 text-sm sm:text-base text-zinc-600 leading-relaxed">
               <p>
-                My background in Psychology has shaped how I approach HR — from understanding people through assessment to working with structured processes and HR data.
+                I’ve always been curious about how things work — especially when people are involved. That curiosity led me to Psychology, and eventually into HR, where I found a space that combines people, problem-solving, and the practical side of getting things done.
               </p>
               <p>
-                My experience covers Talent Management, Recruitment, HR Operations, People Development, Psychological Assessment, and Workforce Planning. I enjoy working on HR processes where people information needs to be translated into clear and practical decisions.
+                I enjoy work that makes me think, ask questions, and occasionally go, “there has to be a better way to do this.” That mindset has followed me across different sides of HR — from assessment and training to HR operations and, now, talent management.
               </p>
               <p>
-                Across my roles, I have worked with talent pools and promotion readiness, recruitment and assessment, payroll and HR administration, TNA and IDP, HR dashboards, and workforce planning scenarios.
+                Along the way, I’ve learned that working with people rarely comes with a simple formula. Sometimes the answer is in the data, sometimes it comes from understanding the person behind it, and often, it takes a bit of both. That’s probably what I enjoy most about HR — there’s always a real person, a real problem, and a practical side to figure out.
+              </p>
+              <p className="italic text-zinc-500">
+                That’s only part of the story. The rest is probably easier to understand through the work itself — so, keep going.
               </p>
             </div>
 
