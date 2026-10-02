@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Mail, Linkedin, FileDown, Send, CheckCircle2, ArrowUpRight, Copy, Check } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  FileDown,
+  Send,
+  CheckCircle2,
+  ArrowUpRight,
+  Copy,
+  Check,
+} from "lucide-react";
 import { PROFILE } from "../data/portfolioData";
 
 interface ContactSectionProps {
@@ -29,23 +38,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-24 border-b border-zinc-200/80 bg-white">
+    <section
+      id="contact"
+      className="py-20 sm:py-24 border-b border-zinc-200/80 bg-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Direct Inquiries & Contact Channels */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider">
                 <span>Contact</span>
                 <span aria-hidden="true">·</span>
                 <span>Get in Touch</span>
               </div>
+
               <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 leading-tight">
-                Let’s talk about people, process, and better HR decisions.
+                People. Process. And the work in between.
               </h2>
-              <p className="text-sm text-zinc-600 leading-relaxed">
-                Open to discussions regarding HR opportunities across Talent Management, Recruitment, HR Operations, People Development, Psychological Assessment, or Workforce Planning.
-              </p>
+
+              <div className="space-y-4">
+                <p className="text-sm text-zinc-600 leading-relaxed">
+                  HR, to me, is rarely just about having the right answer. It’s
+                  about asking the right questions, understanding the people
+                  involved, and figuring out how people, processes, and
+                  decisions connect.
+                </p>
+
+                <p className="text-sm text-zinc-600 leading-relaxed">
+                  That’s what keeps me curious — from talent and recruitment to
+                  assessment, people development, HR operations, and the
+                  everyday work that keeps HR moving. I enjoy finding ways to
+                  make a structured process feel a little clearer, more useful,
+                  and more human.
+                </p>
+
+                <p className="text-sm text-zinc-600 leading-relaxed">
+                  Have an idea, a project, a question, or a different
+                  perspective?
+                </p>
+
+                <p className="text-sm font-semibold text-zinc-900">
+                  I’d love to hear from you.
+                </p>
+              </div>
             </div>
 
             {/* Contact Channels Cards */}
@@ -56,8 +92,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                   <div className="p-2 rounded-lg bg-white border border-zinc-200 text-blue-600">
                     <Mail className="w-4 h-4" />
                   </div>
+
                   <div>
-                    <div className="text-[11px] font-medium text-zinc-500">Email Address</div>
+                    <div className="text-[11px] font-medium text-zinc-500">
+                      Email Address
+                    </div>
+
                     <a
                       href={`mailto:${PROFILE.email}`}
                       className="text-xs sm:text-sm font-semibold text-zinc-900 hover:text-blue-600 transition-colors"
@@ -87,8 +127,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                   <div className="p-2 rounded-lg bg-white border border-zinc-200 text-blue-600">
                     <Linkedin className="w-4 h-4" />
                   </div>
+
                   <div>
-                    <div className="text-[11px] font-medium text-zinc-500">Professional Network</div>
+                    <div className="text-[11px] font-medium text-zinc-500">
+                      Professional Network
+                    </div>
+
                     <div className="text-xs sm:text-sm font-semibold text-zinc-900">
                       LinkedIn Profile
                     </div>
@@ -112,8 +156,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                   <div className="p-2 rounded-lg bg-white border border-zinc-200 text-zinc-800">
                     <FileDown className="w-4 h-4" />
                   </div>
+
                   <div>
-                    <div className="text-[11px] font-medium text-zinc-500">Download CV</div>
+                    <div className="text-[11px] font-medium text-zinc-500">
+                      Download CV
+                    </div>
+
                     <div className="text-xs sm:text-sm font-semibold text-zinc-900">
                       Curriculum Vitae (PDF)
                     </div>
@@ -141,6 +189,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                 <h3 className="text-base sm:text-lg font-semibold text-zinc-900">
                   Send a Message
                 </h3>
+
                 <p className="text-xs text-zinc-500 mt-0.5">
                   Direct message to Rio Koresh Yeremia.
                 </p>
@@ -151,10 +200,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                   <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h4 className="text-base font-semibold text-zinc-900">Thank you for reaching out!</h4>
+
+                  <h4 className="text-base font-semibold text-zinc-900">
+                    Thank you for reaching out!
+                  </h4>
+
                   <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto leading-relaxed">
-                    Your note regarding <strong>{formData.topic}</strong> has been received. Rio will respond to you at <strong>{formData.email || "your provided address"}</strong>.
+                    Your note regarding <strong>{formData.topic}</strong> has
+                    been received. Rio will respond to you at{" "}
+                    <strong>
+                      {formData.email || "your provided address"}
+                    </strong>
+                    .
                   </p>
+
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
@@ -175,30 +234,48 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label htmlFor="name" className="text-xs font-semibold text-zinc-700">
+                      <label
+                        htmlFor="name"
+                        className="text-xs font-semibold text-zinc-700"
+                      >
                         Your Name *
                       </label>
+
                       <input
                         id="name"
                         type="text"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            name: e.target.value,
+                          })
+                        }
                         placeholder="e.g. Sarah Jenkins"
                         className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label htmlFor="email" className="text-xs font-semibold text-zinc-700">
+                      <label
+                        htmlFor="email"
+                        className="text-xs font-semibold text-zinc-700"
+                      >
                         Email Address *
                       </label>
+
                       <input
                         id="email"
                         type="email"
                         required
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            email: e.target.value,
+                          })
+                        }
                         placeholder="e.g. s.jenkins@company.com"
                         className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                       />
@@ -207,49 +284,93 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label htmlFor="org" className="text-xs font-semibold text-zinc-700">
+                      <label
+                        htmlFor="org"
+                        className="text-xs font-semibold text-zinc-700"
+                      >
                         Company / Organization
                       </label>
+
                       <input
                         id="org"
                         type="text"
                         value={formData.organization}
-                        onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            organization: e.target.value,
+                          })
+                        }
                         placeholder="e.g. Retail Horizon Group"
                         className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label htmlFor="topic" className="text-xs font-semibold text-zinc-700">
+                      <label
+                        htmlFor="topic"
+                        className="text-xs font-semibold text-zinc-700"
+                      >
                         Topic
                       </label>
+
                       <select
                         id="topic"
                         value={formData.topic}
-                        onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            topic: e.target.value,
+                          })
+                        }
                         className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                       >
-                        <option value="Talent Management / Succession">Talent Management &amp; Succession</option>
-                        <option value="Recruitment & Assessment">Recruitment &amp; Assessment</option>
-                        <option value="HR Operations & Administration">HR Operations &amp; Administration</option>
-                        <option value="People Development (TNA/IDP)">People Development (TNA/IDP)</option>
-                        <option value="Workforce Planning">Workforce Planning</option>
-                        <option value="General Professional Discussion">General Professional Discussion</option>
+                        <option value="Talent Management / Succession">
+                          Talent Management &amp; Succession
+                        </option>
+
+                        <option value="Recruitment & Assessment">
+                          Recruitment &amp; Assessment
+                        </option>
+
+                        <option value="HR Operations & Administration">
+                          HR Operations &amp; Administration
+                        </option>
+
+                        <option value="People Development (TNA/IDP)">
+                          People Development (TNA/IDP)
+                        </option>
+
+                        <option value="Workforce Planning">
+                          Workforce Planning
+                        </option>
+
+                        <option value="General Professional Discussion">
+                          General Professional Discussion
+                        </option>
                       </select>
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="msg" className="text-xs font-semibold text-zinc-700">
+                    <label
+                      htmlFor="msg"
+                      className="text-xs font-semibold text-zinc-700"
+                    >
                       Message *
                     </label>
+
                     <textarea
                       id="msg"
                       required
                       rows={4}
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          message: e.target.value,
+                        })
+                      }
                       placeholder="Share a brief message..."
                       className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                     />
