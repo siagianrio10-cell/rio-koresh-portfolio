@@ -18,7 +18,7 @@ interface ContactSectionProps {
 // Paste your Formspree endpoint here, e.g. "https://formspree.io/f/abcdwxyz"
 // Free signup at formspree.io -> New Form -> use your email -> copy the endpoint URL.
 // While this is empty, the form falls back to opening the visitor's email app.
-const FORM_ENDPOINT = "";
+const FORM_ENDPOINT = "https://formspree.io/f/xzedplnw";
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
