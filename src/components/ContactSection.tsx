@@ -15,9 +15,16 @@ interface ContactSectionProps {
   onOpenCV: () => void;
 }
 
+// Paste your Formspree endpoint here, e.g. "https://formspree.io/f/abcdwxyz"
+// Free signup at formspree.io -> New Form -> use your email -> copy the endpoint URL.
+// While this is empty, the form falls back to opening the visitor's email app.
+const FORM_ENDPOINT = "";
+
 export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,9 +39,49 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setSendError(false);
+
+    // Honeypot: real visitors never see or fill this field; bots do.
+    const honeypot = (e.currentTarget.elements.namedItem("website") as HTMLInputElement | null)?.value;
+    if (honeypot) {
+      setFormSubmitted(true);
+      return;
+    }
+
+    // Fallback until a Formspree endpoint is set: open the visitor's email app, prefilled.
+    if (!FORM_ENDPOINT) {
+      const body = `${formData.message}\n\n— ${formData.name}${
+        formData.organization ? `, ${formData.organization}` : ""
+      }\n${formData.email}`;
+      window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(
+        `[Portfolio] ${formData.topic}`
+      )}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          organization: formData.organization,
+          topic: formData.topic,
+          message: formData.message,
+          _subject: `[Portfolio] ${formData.topic} — ${formData.name}`,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setFormSubmitted(true);
+    } catch {
+      setSendError(true);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -206,8 +253,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                   </h4>
 
                   <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto leading-relaxed">
-                    Your note regarding <strong>{formData.topic}</strong> has
-                    been received. Rio will respond to you at{" "}
+                    Your message about <strong>{formData.topic}</strong> was sent.
+                    Rio will reply to{" "}
                     <strong>
                       {formData.email || "your provided address"}
                     </strong>
@@ -232,6 +279,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label
@@ -376,12 +431,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCV }) => {
                     />
                   </div>
 
+                  {sendError && (
+                    <p role="alert" className="text-xs text-red-600">
+                      Something went wrong and your message wasn't sent. Please try again, or email{" "}
+                      <a href={`mailto:${PROFILE.email}`} className="underline font-medium">
+                        {PROFILE.email}
+                      </a>{" "}
+                      directly.
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 text-xs sm:text-sm font-medium text-white bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors shadow-xs cursor-pointer"
+                    disabled={isSending}
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 text-xs sm:text-sm font-medium text-white bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors shadow-xs cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Message</span>
+                    <span>{isSending ? "Sending…" : "Send Message"}</span>
                   </button>
                 </form>
               )}
