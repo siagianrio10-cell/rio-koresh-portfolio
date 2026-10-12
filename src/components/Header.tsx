@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         mobileMenuOpen
-          ? "bg-white border-b border-zinc-200"
+          ? "bg-zinc-950 border-b border-zinc-800"
           : isScrolled
           ? "bg-white/95 backdrop-blur-md border-b border-zinc-200/80 shadow-2xs"
           : "bg-[#FAFAFA]/90 backdrop-blur-xs border-b border-zinc-200/50"
@@ -79,7 +79,11 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick("home")}
             className="text-left group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-600 rounded"
           >
-            <span className="text-base sm:text-lg font-semibold tracking-tight text-zinc-900 group-hover:text-blue-900 transition-colors">
+            <span
+              className={`text-base sm:text-lg font-semibold tracking-tight transition-colors ${
+                mobileMenuOpen ? "text-white" : "text-zinc-900 group-hover:text-blue-900"
+              }`}
+            >
               {PROFILE.name}
             </span>
           </button>
@@ -126,7 +130,11 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 -mr-2 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors cursor-pointer"
+            className={`md:hidden p-2.5 -mr-2 rounded-lg transition-colors cursor-pointer ${
+              mobileMenuOpen
+                ? "text-white hover:bg-white/10"
+                : "text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100"
+            }`}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -137,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Menu: full-screen panel below the header bar */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute left-0 right-0 top-full h-[calc(100dvh-4rem)] bg-white flex flex-col px-6 pt-6 pb-8 overflow-y-auto">
+        <div className="md:hidden absolute left-0 right-0 top-full h-[calc(100dvh-4rem)] bg-zinc-950 flex flex-col px-6 pt-6 pb-8 overflow-y-auto">
           <nav className="flex-1">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id && !isCaseStudyOpen;
@@ -145,13 +153,13 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className={`flex w-full items-center justify-between py-3.5 border-b border-zinc-100 text-left font-serif text-[1.65rem] leading-tight tracking-tight transition-colors cursor-pointer ${
-                    isActive ? "text-blue-600" : "text-zinc-900 active:text-blue-600"
+                  className={`flex w-full items-center justify-between py-3.5 border-b border-white/10 text-left font-serif text-[2rem] leading-tight tracking-tight transition-colors cursor-pointer ${
+                    isActive ? "text-blue-400" : "text-white active:text-blue-400"
                   }`}
                 >
                   <span>{link.label}</span>
                   {isActive && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-600" aria-hidden="true" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-400" aria-hidden="true" />
                   )}
                 </button>
               );
@@ -165,26 +173,26 @@ export const Header: React.FC<HeaderProps> = ({
               target="_blank"
               rel="noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex w-full items-center justify-center gap-2 py-3 text-sm font-medium text-white bg-zinc-900 rounded-xl active:bg-zinc-800"
+              className="flex w-full items-center justify-center gap-2 py-3 text-sm font-semibold text-zinc-900 bg-white rounded-xl active:bg-zinc-200"
             >
               <FileDown className="w-4 h-4" />
               <span>Download CV</span>
             </a>
 
-            <div className="flex items-center gap-3 text-zinc-500">
+            <div className="flex items-center gap-3 text-zinc-300">
               <a
                 href={PROFILE.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="p-2.5 rounded-lg border border-zinc-200 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+                className="p-2.5 rounded-lg border border-white/20 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${PROFILE.email}`}
                 aria-label="Email"
-                className="p-2.5 rounded-lg border border-zinc-200 hover:text-zinc-900 hover:bg-zinc-50 transition-colors"
+                className="p-2.5 rounded-lg border border-white/20 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <Mail className="w-4 h-4" />
               </a>
