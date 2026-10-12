@@ -22,7 +22,10 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Mobile safety layer */
+/* ---------------------------------------------------------
+   Mobile refinement layer
+   Keeps the existing desktop identity; improves small screens.
+   --------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -53,17 +56,71 @@ main[id] {
 }
 
 @media (max-width: 640px) {
+  body {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* Give the fixed header a little more breathing room without
+     changing the established desktop navigation. */
+  header > div:first-child {
+    min-height: 60px;
+    height: 60px;
+  }
+
+  header button,
+  header a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  header button[aria-label="Toggle navigation menu"] {
+    min-width: 42px;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Avoid oversized section gaps on narrow screens. */
+  main section {
+    scroll-margin-top: 4.75rem;
+  }
+
+  main section[class*="pt-28"],
+  main section[class*="pt-32"] {
+    padding-top: 5.75rem;
+  }
+
+  main section[class*="pb-20"],
+  main section[class*="pb-24"] {
+    padding-bottom: 3.5rem;
+  }
+
+  /* Improve reading rhythm for small text while preserving the
+     visual hierarchy already defined by the site's Tailwind classes. */
   main p {
-    overflow-wrap: break-word;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
   }
 
   main h1,
   main h2,
   main h3 {
     text-wrap: balance;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
+  /* Cards and media should never push the viewport sideways. */
+  main [class*="rounded-2xl"],
+  main [class*="rounded-xl"] {
+    min-width: 0;
+  }
+
+  main img {
+    height: auto;
+  }
+
+  /* Keep tap targets comfortable on mobile. */
   main button,
   main a,
   footer button,
@@ -71,10 +128,38 @@ main[id] {
     touch-action: manipulation;
   }
 
-  main pre {
+  /* Dashboard / case-study visuals can be inspected without causing
+     the whole page to overflow horizontally. */
+  main pre,
+  main table {
     max-width: 100%;
+  }
+
+  main pre {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  main table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 380px) {
+  header > div:first-child {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  header button span {
+    letter-spacing: -0.025em;
+  }
+
+  main section > div[class*="mx-auto"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 

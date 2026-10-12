@@ -10,28 +10,8 @@ import { Footer } from "./components/Footer";
 import { CaseStudyView } from "./components/CaseStudyView";
 import { CVModal } from "./components/CVModal";
 import { Reveal } from "./components/Reveal";
-import { MobileHome } from "./components/MobileHome";
-
-// True on phones (below the md breakpoint), updates live on resize/rotate
-function useIsMobile() {
-  const query = "(max-width: 767px)";
-  const [isMobile, setIsMobile] = useState<boolean>(() =>
-    typeof window !== "undefined" ? window.matchMedia(query).matches : false
-  );
-
-  useEffect(() => {
-    const mql = window.matchMedia(query);
-    const handler = () => setIsMobile(mql.matches);
-    handler();
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-
-  return isMobile;
-}
 
 export default function App() {
-  const isMobile = useIsMobile();
   const [activeSection, setActiveSection] = useState<string>("home");
   const [activeCaseStudyId, setActiveCaseStudyId] = useState<string | null>(null);
   const [isCVModalOpen, setIsCVModalOpen] = useState<boolean>(false);
@@ -118,13 +98,6 @@ export default function App() {
             projectId={activeCaseStudyId}
             onClose={handleCloseCaseStudy}
             onSelectProject={handleOpenCaseStudy}
-          />
-        </main>
-      ) : isMobile ? (
-        <main>
-          <MobileHome
-            onNavigate={handleNavigate}
-            onOpenCaseStudy={handleOpenCaseStudy}
           />
         </main>
       ) : (
